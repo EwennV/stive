@@ -10,17 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add Jwt Authenticiation
 var jwtKey = "MaSuperCleSecreteTresLonguePourJWT12345";
 
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(builder =>
-    {
-        builder.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader();
-    });
-});
-
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -93,10 +82,10 @@ builder.Services.AddScoped<UserService>();
 var app = builder.Build();
 
 // Add authentication to app
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors();
 
 // Effectue les migrations 
 using (var scope = app.Services.CreateScope())
