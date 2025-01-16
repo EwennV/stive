@@ -91,12 +91,12 @@ builder.Services.AddScoped<SupplierService>();
 builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
+app.UseCors();
 
 // Add authentication to app
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors();
 
 // Effectue les migrations 
 using (var scope = app.Services.CreateScope())
